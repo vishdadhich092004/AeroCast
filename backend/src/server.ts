@@ -19,6 +19,7 @@ connectDB()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`AeroCast API running on http://localhost:${PORT}`);
+      console.log('Database connection verified');
     });
   })
   .catch((err) => {
