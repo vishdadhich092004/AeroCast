@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DateRangePicker from '../components/DateRangePicker'
 import HorizonSlider from '../components/HorizonSlider'
 import ForecastChart from '../components/ForecastChart'
@@ -12,18 +12,16 @@ export default function Dashboard() {
   const [data, setData] = useState<GenerationData[]>([])
   const [loading, setLoading] = useState(false)
 
-  async function handleLoad() {
+  useEffect(() => {
     setLoading(true)
-    try {
-      const result = await getGenerationData(startDate, endDate, horizon)
-      setData(result)
-    } catch (err) {
-      console.error('Failed to load generation data:', err)
-      setData([])
-    } finally {
-      setLoading(false)
-    }
-  }
+    getGenerationData(startDate, endDate, horizon)
+      .then((result) => setData(result))
+      .catch((err) => {
+        console.error('Failed to load generation data:', err)
+        setData([])
+      })
+      .finally(() => setLoading(false))
+  }, [startDate, endDate, horizon])
 
   return (
     <main
@@ -46,16 +44,9 @@ export default function Dashboard() {
           setEndDate={setEndDate}
         />
         <HorizonSlider horizon={horizon} setHorizon={setHorizon} />
-        <button
-          onClick={handleLoad}
-          disabled={loading}
-          style={{ alignSelf: 'flex-start', padding: '0.5rem 1rem' }}
-        >
-          {loading ? 'Loading...' : 'Load Forecast'}
-        </button>
       </div>
 
-      <ForecastChart data={data} />
+      <ForecastChart data={data} loading={loading} />
     </main>
   )
 }
