@@ -105,7 +105,8 @@ export default function ForecastChart({ data, loading = false }: ForecastChartPr
               labelFormatter={formatTime}
               formatter={(value: number, name: string) => [`${value} MW`, name]}
               contentStyle={{ borderRadius: '12px', border: '1px solid var(--color-border)', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', fontWeight: 600, backgroundColor: 'var(--color-background)' }}
-              cursor={{ stroke: 'var(--color-ring)', strokeWidth: 2, strokeDasharray: '4 4' }}
+              cursor={{ stroke: 'var(--color-ring)', strokeWidth: 1, strokeDasharray: '4 4' }}
+              shared={true}
             />
             <Legend wrapperStyle={{ paddingTop: '24px' }} iconType="circle" />
             <Line
@@ -115,8 +116,9 @@ export default function ForecastChart({ data, loading = false }: ForecastChartPr
               stroke="var(--color-chart-1)"
               strokeWidth={4}
               dot={false}
-              activeDot={{ r: 6, strokeWidth: 0, fill: "var(--color-chart-1)" }}
+              activeDot={{ r: 8, strokeWidth: 2, fill: "var(--color-chart-1)", stroke: "var(--color-background)" }}
               connectNulls
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
@@ -126,8 +128,9 @@ export default function ForecastChart({ data, loading = false }: ForecastChartPr
               strokeWidth={3}
               dot={false}
               strokeDasharray="6 4"
-              activeDot={{ r: 6, strokeWidth: 0, fill: "var(--color-chart-2)" }}
+              activeDot={{ r: 8, strokeWidth: 2, fill: "var(--color-chart-2)", stroke: "var(--color-background)" }}
               connectNulls
+              isAnimationActive={false}
             />
           </LineChart>
         </ResponsiveContainer>
