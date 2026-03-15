@@ -45,13 +45,15 @@ AeroCast/
 ```bash
 cd backend
 npm install
-cp .env.example .env   # Configure your MONGO_URI
+cp .env.example .env   # Configure your MONGO_URI (e.g. MongoDB Atlas or local MongoDB)
 npm run dev
 ```
 
+**Prerequisites:** Ensure MongoDB is running (local or Atlas). Set `MONGO_URI` in `.env` before running ingestion.
+
 **Data Preparation Scripts:**
-- `npm run ingest`: Fetch recent wind data from BMRS.
-- `ts-node src/scripts/exportDataToCSV.ts`: (Used to generate CSVs for the analysis folder).
+- `npm run ingest`: Fetch January 2024 wind data from BMRS and load into MongoDB.
+- `npx ts-node src/scripts/exportDataToCSV.ts`: Export data to CSVs for the analysis folder (run from `backend/`).
 
 ### 2. Frontend
 ```bash
@@ -63,7 +65,7 @@ npm run dev
 Dashboard runs at `http://localhost:5173`.
 
 ### 3. Analysis
-1. Ensure you have the datasets in `analysis/` (run the backend export script if needed).
+1. Export datasets to `analysis/` by running from `backend/`: `npx ts-node src/scripts/exportDataToCSV.ts`
 2. Open `analysis/wind_forecast_analysis.ipynb` in any Jupyter-supported environment (VS Code, JupyterLab).
 
 ---

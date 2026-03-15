@@ -129,7 +129,7 @@ export default function ForecastChart({ data, loading = false }: ForecastChartPr
               dot={false}
               strokeDasharray="6 4"
               activeDot={{ r: 8, strokeWidth: 2, fill: "var(--color-chart-2)", stroke: "var(--color-background)" }}
-              connectNulls
+              connectNulls={false}
               isAnimationActive={false}
             />
           </LineChart>
