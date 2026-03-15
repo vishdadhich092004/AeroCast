@@ -12,7 +12,7 @@ export default function DateRangePicker({
   setEndDate,
 }: DateRangePickerProps) {
   return (
-    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
       <div>
         <label htmlFor="start-date" style={{ marginRight: '0.5rem' }}>
           Start Date

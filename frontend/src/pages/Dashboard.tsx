@@ -26,12 +26,13 @@ export default function Dashboard() {
   return (
     <main
       style={{
-        padding: '2rem',
+        padding: '1rem 1.5rem 2rem',
         maxWidth: '1200px',
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'column',
         gap: '1.5rem',
+        minHeight: '100vh',
       }}
     >
       <h1>AeroCast Wind Forecast Monitor</h1>
@@ -46,7 +47,9 @@ export default function Dashboard() {
         <HorizonSlider horizon={horizon} setHorizon={setHorizon} />
       </div>
 
-      <ForecastChart data={data} loading={loading} />
+      <section aria-label="Forecast generation chart">
+        <ForecastChart data={data} loading={loading} />
+      </section>
     </main>
   )
 }

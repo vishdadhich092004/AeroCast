@@ -5,7 +5,7 @@ interface HorizonSliderProps {
 
 export default function HorizonSlider({ horizon, setHorizon }: HorizonSliderProps) {
   return (
-    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
       <label htmlFor="horizon">Forecast horizon (hours)</label>
       <input
         id="horizon"
