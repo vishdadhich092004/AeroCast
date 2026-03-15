@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import { connectDB } from './config/db';
 import healthRoutes from './routes/health';
+import generationRoutes from './routes/generationRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use(healthRoutes);
+app.use('/api', generationRoutes);
 
 // Connect to MongoDB and start server
 connectDB()
