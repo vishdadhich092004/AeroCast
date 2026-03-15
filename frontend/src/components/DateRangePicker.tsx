@@ -17,25 +17,27 @@ export default function DateRangePicker({
   return (
     <div className="flex flex-wrap gap-4 items-end">
       <div className="space-y-2">
-        <Label htmlFor="start-date" className="text-muted-foreground font-medium">
-          Start Date
+        <Label htmlFor="start-datetime" className="text-muted-foreground font-medium">
+          Start Time
         </Label>
         <Input
-          id="start-date"
-          type="date"
+          id="start-datetime"
+          type="datetime-local"
           value={startDate}
+          step="1800"
           className="bg-white/60 backdrop-blur-sm border-white/50 shadow-sm focus-visible:ring-primary/50 transition-all rounded-xl"
           onChange={(e) => setStartDate(e.target.value)}
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="end-date" className="text-muted-foreground font-medium">
-          End Date
+        <Label htmlFor="end-datetime" className="text-muted-foreground font-medium">
+          End Time
         </Label>
         <Input
-          id="end-date"
-          type="date"
+          id="end-datetime"
+          type="datetime-local"
           value={endDate}
+          step="1800"
           className="bg-white/60 backdrop-blur-sm border-white/50 shadow-sm focus-visible:ring-primary/50 transition-all rounded-xl"
           onChange={(e) => setEndDate(e.target.value)}
         />

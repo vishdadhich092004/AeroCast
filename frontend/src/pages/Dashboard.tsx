@@ -7,8 +7,8 @@ import type { GenerationData } from '../types/generation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 
 export default function Dashboard() {
-  const [startDate, setStartDate] = useState('2024-01-01')
-  const [endDate, setEndDate] = useState('2024-01-03')
+  const [startDate, setStartDate] = useState('2024-01-01T00:00')
+  const [endDate, setEndDate] = useState('2024-01-03T23:30')
   const [horizon, setHorizon] = useState(4)
   const [data, setData] = useState<GenerationData[]>([])
   const [loading, setLoading] = useState(false)
@@ -61,7 +61,7 @@ export default function Dashboard() {
           <Card className="border border-black/5 shadow-2xl shadow-black/5 bg-white backdrop-blur-xl rounded-2xl">
             <CardHeader>
               <CardTitle className="text-xl text-primary font-medium">Controls</CardTitle>
-              <CardDescription>Adjust the time window and forecast horizon.</CardDescription>
+              <CardDescription>Adjust the time window and forecast horizon. Times are in UTC.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-8">
               <DateRangePicker
