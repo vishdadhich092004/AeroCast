@@ -1,3 +1,6 @@
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
 interface DateRangePickerProps {
   startDate: string
   endDate: string
@@ -12,26 +15,28 @@ export default function DateRangePicker({
   setEndDate,
 }: DateRangePickerProps) {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
-      <div>
-        <label htmlFor="start-date" style={{ marginRight: '0.5rem' }}>
+    <div className="flex flex-wrap gap-4 items-end">
+      <div className="space-y-2">
+        <Label htmlFor="start-date" className="text-muted-foreground font-medium">
           Start Date
-        </label>
-        <input
+        </Label>
+        <Input
           id="start-date"
           type="date"
           value={startDate}
+          className="bg-white/60 backdrop-blur-sm border-white/50 shadow-sm focus-visible:ring-primary/50 transition-all rounded-xl"
           onChange={(e) => setStartDate(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="end-date" style={{ marginRight: '0.5rem' }}>
+      <div className="space-y-2">
+        <Label htmlFor="end-date" className="text-muted-foreground font-medium">
           End Date
-        </label>
-        <input
+        </Label>
+        <Input
           id="end-date"
           type="date"
           value={endDate}
+          className="bg-white/60 backdrop-blur-sm border-white/50 shadow-sm focus-visible:ring-primary/50 transition-all rounded-xl"
           onChange={(e) => setEndDate(e.target.value)}
         />
       </div>
