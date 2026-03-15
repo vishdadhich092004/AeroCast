@@ -4,134 +4,79 @@ A dashboard that monitors **wind power generation forecasts vs actual generation
 
 ---
 
-## Project Overview
+## 🚀 Live Application
 
-AeroCast displays wind power generation data from the UK's Balancing Mechanism Reporting Service (BMRS). Users can compare actual generation against forecasts across configurable date ranges and forecast horizons.
-
----
-
-## System Architecture
-
-```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│    Frontend     │────▶│    Backend      │────▶│  MongoDB Atlas  │
-│  (React/Vite)   │     │ (Express/Node)  │     │   (Database)    │
-│  Vercel Hosted  │     │ Vercel Serverless│    │                 │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-```
-
-- **Frontend**: React SPA deployed as a static site on Vercel
-- **Backend**: Express API deployed as a serverless function on Vercel
-- **Database**: MongoDB Atlas (cloud-hosted)
+The application is deployed on Vercel:
+**[https://aero-cast-theta.vercel.app/](https://aero-cast-theta.vercel.app/)**
 
 ---
 
-## Tech Stack
+## 📂 Project Structure
+
+```text
+AeroCast/
+├── analysis/           # Data analysis & visualisations
+│   ├── wind_forecast_analysis.ipynb  # Main analysis notebook
+│   └── *.csv           # Exported datasets
+├── backend/            # Node.js/Express TypeScript API
+│   ├── src/scripts/    # Data ingestion & export scripts
+│   └── vercel.json     # Backend deployment config
+└── frontend/           # React/Vite TypeScript Dashboard
+    └── src/components/ # UI & Charting components
+```
+
+---
+
+## 🛠️ Tech Stack
 
 | Layer    | Technologies                          |
 | -------- | ------------------------------------- |
 | Frontend | React, TypeScript, Vite, Recharts     |
 | Backend  | Node.js, Express, TypeScript          |
-| Database | MongoDB (Mongoose)                    |
-| Hosting  | Vercel (frontend + backend)           |
+| Database | MongoDB Atlas (Mongoose)              |
+| Analysis | Python, Pandas, Matplotlib, Seaborn   |
+| Hosting  | Vercel (Frontend + API)               |
 
 ---
 
-## Setup Instructions
+## ⚙️ Setup Instructions
 
-### Backend
-
+### 1. Backend
 ```bash
 cd backend
-cp .env.example .env   # Edit .env with your MongoDB URI
 npm install
+cp .env.example .env   # Configure your MONGO_URI
 npm run dev
 ```
 
-The API runs at `http://localhost:5000`.
+**Data Preparation Scripts:**
+- `npm run ingest`: Fetch recent wind data from BMRS.
+- `ts-node src/scripts/exportDataToCSV.ts`: (Used to generate CSVs for the analysis folder).
 
-**Ingest sample data** (optional):
-
-```bash
-npm run ingest
-```
-
-### Frontend
-
+### 2. Frontend
 ```bash
 cd frontend
-cp .env.example .env   # Edit .env if needed (default: localhost:5000)
 npm install
+cp .env.example .env   # Set VITE_API_URL if needed
 npm run dev
 ```
+Dashboard runs at `http://localhost:5173`.
 
-The dashboard runs at `http://localhost:5173`.
-
----
-
-## Deployment Instructions
-
-Frontend and backend deploy as **separate Vercel projects**.
-
-### Backend Deployment on Vercel
-
-1. Create a new project on [Vercel](https://vercel.com) and import your repository.
-2. Set the **Root Directory** to `backend`.
-3. Configure environment variables (see below).
-4. Deploy. The API will be available at `https://your-project.vercel.app`.
-
-**Build settings** (Vercel auto-detects):
-- Framework: Other
-- Build Command: `npm run build` (or leave default)
-- Output Directory: Not used (serverless)
-
-### Frontend Deployment on Vercel
-
-1. Create a **second** Vercel project and import the same repository.
-2. Set the **Root Directory** to `frontend`.
-3. Add `VITE_API_URL` pointing to your deployed backend URL (e.g. `https://your-backend.vercel.app/api`).
-4. Deploy. The dashboard will be available at `https://your-frontend.vercel.app`.
+### 3. Analysis
+1. Ensure you have the datasets in `analysis/` (run the backend export script if needed).
+2. Open `analysis/wind_forecast_analysis.ipynb` in any Jupyter-supported environment (VS Code, JupyterLab).
 
 ---
 
-## Environment Variables
-
-### Backend
-
-| Variable   | Description                          | Required |
-| ---------- | ------------------------------------ | -------- |
-| `MONGO_URI`| MongoDB connection string (Atlas URI) | Yes      |
-| `PORT`     | Server port (local dev only, default: 5000) | No  |
-
-**Configuring in Vercel:**
-1. Project → Settings → Environment Variables
-2. Add `MONGO_URI` with your MongoDB Atlas connection string
-3. Ensure it is set for Production (and Preview if needed)
-
-### Frontend
-
-| Variable       | Description                              | Required |
-| -------------- | ---------------------------------------- | -------- |
-| `VITE_API_URL` | Backend API base URL (e.g. `https://your-backend.vercel.app/api`) | Yes (for production) |
-
-**Local development:** Defaults to `http://localhost:5000/api` if not set.
-
-**Configuring in Vercel:**
-1. Project → Settings → Environment Variables
-2. Add `VITE_API_URL` with your deployed backend URL + `/api`
-3. Example: `https://aerocast-api.vercel.app/api`
-
----
-
-## API Endpoints
+## 📡 API Endpoints
 
 | Method | Path           | Description                    |
 | ------ | -------------- | ------------------------------ |
-| GET    | `/health`      | Health check                  |
-| GET    | `/api/generation` | Wind generation data (params: `start`, `end`, `horizon`) |
+| GET    | `/health`      | Server health check            |
+| GET    | `/api/generation` | Wind generation data (filters: `start`, `end`, `horizon`) |
 
 ---
 
-## AI Tools Disclosure
+## 🤖 AI Tools Disclosure
 
-AI tools such as ChatGPT or Cursor were used for development assistance during the creation of this project.
+AI tools such as ChatGPT and Cursor were used for development assistance during the creation of this project.
