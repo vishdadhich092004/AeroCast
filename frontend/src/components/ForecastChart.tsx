@@ -16,12 +16,13 @@ interface ForecastChartProps {
   loading?: boolean
 }
 
+/** BMRS + API use UTC; avoid local getHours/getDate or ticks look "ahead" vs selected UTC range. */
 function formatTime(time: string): string {
   const d = new Date(time)
-  const month = d.toLocaleString('en-US', { month: 'short' })
-  const day = String(d.getDate()).padStart(2, '0')
-  const hours = String(d.getHours()).padStart(2, '0')
-  const mins = String(d.getMinutes()).padStart(2, '0')
+  const month = d.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' })
+  const day = String(d.getUTCDate()).padStart(2, '0')
+  const hours = String(d.getUTCHours()).padStart(2, '0')
+  const mins = String(d.getUTCMinutes()).padStart(2, '0')
   return `${month} ${day} ${hours}:${mins}`
 }
 
